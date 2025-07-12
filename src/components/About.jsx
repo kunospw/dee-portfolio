@@ -1,6 +1,7 @@
 // src/components/About.jsx
 import React, { useState, useEffect } from 'react';
 import userProfileImage from '../assets/Profile.png';
+import cvFile from '../assets/Dyah_Puspo_Rini_CV.pdf';
 
 const About = () => {
   const phrases = ['Dyah Puspo Rini', 'Dee.'];
@@ -43,6 +44,15 @@ const About = () => {
     };
   }, [subIndex, index, deleting]);
 
+  const handleDownloadCV = () => {
+    const link = document.createElement('a');
+    link.href = cvFile;
+    link.download = 'Dyah_Puspo_Rini_CV.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="flex justify-center w-full">
       <div className="flex items-stretch gap-3 w-full max-w-2xl">
@@ -57,7 +67,7 @@ const About = () => {
             </span>
           </div>
 
-          <div className="bg-blue-100 flex flex-col justify-end h-48.5   overflow-hidden">
+          <div className="bg-blue-100 flex flex-col justify-end h-48.5 overflow-hidden">
             <img
               src={userProfileImage}
               alt="Your Profile"
@@ -77,14 +87,27 @@ const About = () => {
             </span>
           </div>
 
-          <div className="bg-blue-100 text-blue-900 text-xs p-2 font-mono border-t border-blue-800 h-48">
-            <p className="mb-2 min-h-[1rem]">
-              <span className="font-bold text-blue-900">{text}</span>
-              <span className="animate-pulse text-blue-700">|</span>
-            </p>
-            <p className="text-xs leading-relaxed">
-              Informatics student passionate about game and web development. Aspiring to become a jack-of-all-trades, blending creativity and logic like a witchcraft spell. Staying authentic above all else, with a soft spot for cowboys and raccoons.
-            </p>
+          <div className="bg-blue-100 text-blue-900 text-xs p-2 font-mono border-t border-blue-800 h-48 flex flex-col">
+            <div className="flex-1">
+              <p className="mb-2 min-h-[1rem]">
+                <span className="font-bold text-blue-900">{text}</span>
+                <span className="animate-pulse text-blue-700">|</span>
+              </p>
+              <p className="text-xs leading-relaxed">
+                Informatics student passionate about game and web development. Aspiring to become a jack-of-all-trades, blending creativity and logic like a witchcraft spell. Staying authentic above all else, with a soft spot for cowboys and raccoons.
+              </p>
+            </div>
+            
+            {/* Download CV Button */}
+            <div className="mt-3 pt-2 border-t border-blue-300">
+              <button
+                onClick={handleDownloadCV}
+                className="w-full bg-blue-600 hover:bg-blue-700 text-blue-100 font-bold py-1 px-2 text-xs border border-blue-800 transition-colors duration-200"
+                aria-label="Download CV"
+              >
+                📄 Download CV
+              </button>
+            </div>
           </div>
         </div>
       </div>
