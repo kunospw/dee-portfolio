@@ -1,34 +1,43 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,900|Source+Sans+Pro:300,400");
 @import "tailwindcss";
 
-/* Retro font stack for that authentic 90s/early 2000s feel */
-/* body {
-  font-family: "MS Sans Serif", "Tahoma", "Geneva", "Verdana", sans-serif;
-} */
+@font-face {
+  font-family: "retro";
+  src: url("/font/Pixel-Miners.otf") format("opentype");
+}
 
-/* Alternative font options - uncomment one to try different retro looks */
+@font-face {
+  font-family: "retro1";
+  src: url("/font/dpcomic.ttf") format("truetype");
+}
 
-/* Classic Windows 95/98 look */
-/* body {
-  font-family: 'MS Sans Serif', 'Microsoft Sans Serif', sans-serif;
-} */
-
-/* Early web standard */
-/* body {
-  font-family: 'Arial', 'Helvetica', sans-serif;
-} */
-
-/* Slightly more modern 2000s feel */
+html,
 body {
-  font-family: "Tahoma", "Geneva", "Verdana", sans-serif;
+  font-family: "retro", monospace;
 }
 
-/* For the counter/digital display - classic monospace */
-.font-mono {
-  font-family: "Courier New", "Courier", "Lucida Console", monospace;
+html {
+  /* Added scroll-behavior for smooth scrolling */
+  scroll-behavior: smooth;
 }
 
-/* Optional: Add some retro styling to make it even more authentic */
-.retro-button {
-  font-family: "MS Sans Serif", "Tahoma", sans-serif;
-  text-rendering: optimizeSpeed; /* Disables font smoothing for that pixelated look */
+html,
+body,
+#root {
+  height: 100%;
+}
+
+/* For pixel art style */
+.font-retro {
+  font-family: "retro", monospace;
+}
+
+/* For comic style */
+.font-comic {
+  font-family: "retro1", sans-serif;
+}
+
+/* For clean modern look */
+.font-roboto {
+  font-family: "Roboto", sans-serif;
 }

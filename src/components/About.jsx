@@ -1,0 +1,95 @@
+// src/components/About.jsx
+import React, { useState, useEffect } from 'react';
+import userProfileImage from '../assets/Profile.png';
+
+const About = () => {
+  const phrases = ['Dyah Puspo Rini', 'Dee.'];
+  const [text, setText] = useState('');
+  const [index, setIndex] = useState(0);
+  const [subIndex, setSubIndex] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentPhrase = phrases[index];
+    let active = true;
+
+    if (!deleting && subIndex === currentPhrase.length) {
+      const pause = setTimeout(() => {
+        if (active) setDeleting(true);
+      }, 1500);
+      return () => clearTimeout(pause);
+    }
+
+    if (deleting && subIndex === 0) {
+      setDeleting(false);
+      setIndex((prev) => (prev + 1) % phrases.length);
+      return;
+    }
+
+    const timeout = setTimeout(() => {
+      if (!active) return;
+      if (deleting) {
+        setSubIndex((prev) => prev - 1);
+        setText(currentPhrase.substring(0, subIndex - 1));
+      } else {
+        setSubIndex((prev) => prev + 1);
+        setText(currentPhrase.substring(0, subIndex + 1));
+      }
+    }, deleting ? 50 : 100);
+
+    return () => {
+      active = false;
+      clearTimeout(timeout);
+    };
+  }, [subIndex, index, deleting]);
+
+  return (
+    <div className="flex justify-center w-full">
+      <div className="flex items-stretch gap-3 w-full max-w-2xl">
+        {/* Profile Picture Card */}
+        <div className="bg-blue-600 w-48 shadow-lg">
+          <div className="flex justify-between items-center bg-blue-500 border-b border-blue-800 px-2 py-1 text-blue-900 font-bold text-xs">
+            <span>Profile.Exe</span>
+            <span className="flex space-x-1">
+              <button aria-label="minimize" className="w-2 h-2 bg-blue-800 border border-blue-900"></button>
+              <button aria-label="resize" className="w-2 h-2 bg-blue-800 border border-blue-900"></button>
+              <button aria-label="close" className="w-2 h-2 bg-blue-800 border border-blue-900"></button>
+            </span>
+          </div>
+
+          <div className="bg-blue-100 flex flex-col justify-end h-48.5   overflow-hidden">
+            <img
+              src={userProfileImage}
+              alt="Your Profile"
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+
+        {/* About Me Card */}
+        <div className="bg-blue-600 border border-blue-800 flex-1 shadow-lg">
+          <div className="flex justify-between items-center bg-blue-500 border-b border-blue-800 px-2 py-1 text-blue-900 font-bold text-xs">
+            <span>About_Me.Txt</span>
+            <span className="flex space-x-1">
+              <button aria-label="minimize" className="w-2 h-2 bg-blue-800 border border-blue-900"></button>
+              <button aria-label="resize" className="w-2 h-2 bg-blue-800 border border-blue-900"></button>
+              <button aria-label="close" className="w-2 h-2 bg-blue-800 border border-blue-900"></button>
+            </span>
+          </div>
+
+          <div className="bg-blue-100 text-blue-900 text-xs p-2 font-mono border-t border-blue-800 h-48">
+            <p className="mb-2 min-h-[1rem]">
+              <span className="font-bold text-blue-900">{text}</span>
+              <span className="animate-pulse text-blue-700">|</span>
+            </p>
+            <p className="text-xs leading-relaxed">
+              Informatics student passionate about game and web development. Aspiring to become a jack-of-all-trades, blending creativity and logic like a witchcraft spell. Staying authentic above all else, with a soft spot for cowboys and raccoons.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default About;
