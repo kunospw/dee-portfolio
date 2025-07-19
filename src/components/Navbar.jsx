@@ -1,3 +1,4 @@
+// src/components/Navbar.jsx
 import React from 'react';
 import raccoon from '../assets/raccoon.gif';
 import clouds from '../assets/clouds-bg.jpg';
@@ -5,8 +6,9 @@ import clouds from '../assets/clouds-bg.jpg';
 const Navbar = () => {
   const navItems = [
     { name: 'About', id: 'about' },
+    { name: 'Experience', id: 'experience' },
     { name: 'Projects', id: 'projects' },
-    { name: 'Contact', id: 'contact' }, // Added Contact item
+    { name: 'Contact', id: 'contact' },
   ];
 
   return (
@@ -27,8 +29,8 @@ const Navbar = () => {
           <ul className="flex items-center space-x-1">
             {navItems.map((item, index) => (
               <li key={index}>
-                <a // Changed button to a tag
-                  href={`#${item.id}`} // Added href for scrolling
+                <a
+                  href={`#${item.id}`}
                   className="bg-blue-500 hover:bg-blue-400 border-2 border-blue-800 border-r-blue-900 border-b-blue-900 px-3 py-[2px] text-xs font-bold text-blue-900 uppercase tracking-wide shadow-sm active:bg-blue-600"
                 >
                   {item.name}

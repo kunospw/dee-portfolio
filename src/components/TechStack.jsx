@@ -9,20 +9,21 @@ const categories = [
 
 const TechStack = () => {
   const [selected, setSelected] = useState(0);
+  const [isMinimized, setIsMinimized] = useState(false); // New state for minimization
 
   return (
     <div className="flex justify-center w-full mt-4 px-4">
-      <div className="bg-blue-600 border-2 border-blue-800 w-full max-w-2xl shadow-xl">
+      <div className={`bg-blue-600 border-2 border-blue-800 w-full max-w-4xl shadow-xl transition-all duration-500 ease-in-out ${isMinimized ? 'h-10' : 'h-auto'}`}> {/* Increased max-w, added transition and conditional height */}
         <div className="flex justify-between items-center bg-blue-500 border-b-2 border-blue-800 px-3 py-1 text-blue-900 font-bold text-xs uppercase">
           <span>Tech_Stack_Case_File.DB</span>
           <span className="flex space-x-1">
-            <button aria-label="minimize" className="w-3 h-3 bg-blue-800 border border-blue-900"></button>
+            <button aria-label="minimize" className="w-3 h-3 bg-blue-800 border border-blue-900" onClick={() => setIsMinimized(!isMinimized)}></button>
             <button aria-label="resize" className="w-3 h-3 bg-blue-800 border border-blue-900"></button>
             <button aria-label="close" className="w-3 h-3 bg-blue-800 border border-blue-900"></button>
           </span>
         </div>
 
-        <div className="bg-blue-100 text-blue-900 text-xs p-4 font-mono border-t border-blue-800">
+        <div className={`bg-blue-100 text-blue-900 text-xs p-4 font-mono border-t border-blue-800 transition-all duration-500 ease-in-out ${isMinimized ? 'hidden' : 'visible'}`}> {/* Conditional visibility */}
           <div className="flex gap-2 mb-4 flex-wrap justify-center">
             {categories.map((cat, idx) => (
               <button
